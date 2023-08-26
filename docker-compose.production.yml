@@ -11,26 +11,21 @@ services:
     env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
-  
   backend:
-    build: ./backend/
+    image: theomur/kittygram_backend
     env_file: .env
     volumes:
       - static:/backend_static
       - media:/app/media
     depends_on:
       - db
-
   frontend:
-    env_file: .env
-    build: ./frontend/
-    command: cp -r /app/build/. /frontend_static/
+    image: theomur/kittygram_frontend
+    command: cp -r /app/build/. /static/
     volumes:
-      - static:/frontend_static/
-
+      - static:/static
   gateway:
-    build: ./nginx/
-    env_file: .env
+    image: theomur/kittygram_gateway
     ports:
       - 9000:80
     volumes:
