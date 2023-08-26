@@ -11,6 +11,7 @@ services:
     env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
+
   backend:
     image: theomur/kittygram_backend
     env_file: .env
@@ -19,11 +20,13 @@ services:
       - media:/app/media
     depends_on:
       - db
+
   frontend:
     image: theomur/kittygram_frontend
     command: cp -r /app/build/. /static/
     volumes:
       - static:/static
+      
   gateway:
     image: theomur/kittygram_gateway
     ports:
@@ -31,3 +34,5 @@ services:
     volumes:
       - static:/static
       - media:/media
+    depends_on:
+      - backend

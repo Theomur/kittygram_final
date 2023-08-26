@@ -1,3 +1,16 @@
 venv
-.git
 db.sqlite3
+
+**/__pycache__/
+**/*.pyc
+
+*.log
+
+.vscode/
+
+src/
+
+.git
+.gitignore
+
+.env
